@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Ancla Interior: Respiración Consciente</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuración de Fuente y Colores Personalizados de Tailwind */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        :root {
+            --color-primary: #4f46e5; /* Indigo-600 */
+            --color-secondary: #0ea5e9; /* Sky-500 */
+            --color-bg-light: #f9fafb; /* Gray-50 */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-light);
+            color: #1f2937;
+            padding-bottom: 4rem;
+        }
+        .vagal-nerve {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .vagal-nerve:hover {
+            fill: #ef4444; /* Rojo para destacar interacción */
+            transform: scale(1.05);
+        }
+        /* Estilos del Temporizador 4-7-8 */
+        .timer-phase {
+            transition: background-color 0.5s, color 0.5s;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="app" class="max-w-4xl mx-auto bg-white shadow-2xl rounded-3xl p-6 md:p-12 border border-gray-100">
+
+        <!-- TÍTULO Y BIENVENIDA -->
+        <header class="text-center mb-12">
+            <span class="text-xs font-semibold uppercase tracking-widest text-indigo-600 block mb-2">INFOGRAFÍA INTERACTIVA</span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4">Tu Ancla Interior: Regula tu Mente y Emociones a Través de la Respiración</h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                La respiración es un proceso que nutre las células con oxígeno, pero, a diferencia del latido del corazón, podemos "jugar" con ella (alargándola, reteniéndola). Esta intencionalidad se convierte en una herramienta poderosa al alcance de todos para lograr bienestar y consciencia.
+            </p>
+        </header>
+
+        <!-- Elemento Visual Principal y Elemento Interactivo 1: El Freno Vagal -->
+        <section class="mb-12 p-6 bg-sky-50 rounded-2xl border-2 border-sky-200">
+            <h2 class="text-2xl font-bold text-sky-800 mb-4">Mecanismo: Cerebro - Vago - Diafragma</h2>
+            <p class="text-gray-700 mb-6">Un simple diagrama del cuerpo humano para entender la conexión entre la respiración y el sistema nervioso.</p>
+
+            <div class="flex flex-col items-center">
+                <!-- Diagrama Simple del Sistema de Control -->
+                <svg id="diagrama-cuerpo" class="w-full max-w-sm h-auto" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cerebro (Mente) -->
+                    <rect x="150" y="10" width="100" height="40" rx="10" fill="#2563eb"/>
+                    <text x="200" y="35" font-size="14" fill="white" text-anchor="middle" font-weight="bold">Mente (Cerebro)</text>
+
+                    <!-- Conexión Vagal (Línea de Vida) -->
+                    <path id="vago-path" d="M200 50 L200 130" stroke="#f97316" stroke-width="4" stroke-dasharray="8 4"/>
+
+                    <!-- Corazón (Emoción) -->
+                    <rect x="170" y="150" width="60" height="40" rx="10" fill="#dc2626"/>
+                    <text x="200" y="175" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Emoción</text>
+
+                    <!-- Diafragma -->
+                    <path d="M100 250 Q200 200 300 250" stroke="#16a34a" stroke-width="6" fill="#4ade80" opacity="0.7"/>
+                    <text x="200" y="240" font-size="14" fill="#065f46" text-anchor="middle" font-weight="bold">Diafragma (Ancla)</text>
+
+                    <!-- Nervio Vago (ELEMENTO INTERACTIVO 1) -->
+                    <circle id="vago-nerve-trigger" cx="200" cy="130" r="15" fill="#f97316" class="vagal-nerve shadow-lg hover:shadow-xl"/>
+                    <text x="200" y="135" font-size="12" fill="white" text-anchor="middle" font-weight="bold" pointer-events="none">VAGO</text>
+                </svg>
+            </div>
+
+            <!-- Panel de Información del Freno Vagal (Hidden by default) -->
+            <div id="vago-info-panel" class="hidden mt-6 p-4 rounded-xl bg-red-100 border border-red-300">
+                <h3 class="text-xl font-semibold text-red-700">¡Freno Vagal Activado!</h3>
+                <p class="text-red-800 mt-2">
+                    Al respirar lenta y profundamente, se activa el <span class="font-bold">Nervio Vago</span>. Esto produce una disminución del <span class="font-bold">cortisol</span> (la hormona del estrés) y una mejora de la Variabilidad de la Frecuencia Cardíaca (VFC).
+                    Respirar a una pauta de seis respiraciones por minuto se asocia con un mejor estado emocional y tono vagal.
+                </p>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-bold mb-4">🧠 El Mecanismo de Control y Bienestar (SNA)</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-gray-500 rounded-xl overflow-hidden">
+                        <thead class="text-xs text-white uppercase bg-indigo-600">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Rama del SNA</th>
+                                <th scope="col" class="px-6 py-3">Activación</th>
+                                <th scope="col" class="px-6 py-3">Objetivo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-red-50 border-b border-red-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-red-900 whitespace-nowrap">SIMPÁTICO (Alerta)</th>
+                                <td class="px-6 py-4">Estrés, peligro, ansiedad.</td>
+                                <td class="px-6 py-4">Aumenta ritmo cardíaco, tensión arterial, alerta ("Lucha o Huida").</td>
+                            </tr>
+                            <tr class="bg-green-50 border-b border-green-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-green-900 whitespace-nowrap">PARASIMPÁTICO (Calma)</th>
+                                <td class="px-6 py-4">Seguridad, relajación, respiración lenta y profunda.</td>
+                                <td class="px-6 py-4">Interrumpe la respuesta simpática. Disminuye el ritmo cardíaco y la presión arterial. Favorece la digestión, el sueño y la regeneración.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: TÉCNICAS DE RESPIRACIÓN SEGÚN TU OBJETIVO -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-8 text-center">Técnicas de Respiración Según tu Objetivo</h2>
+
+            <!-- A. Objetivo: Calmar la Ansiedad y el Estrés Rápido -->
+            <div class="mb-8 p-6 bg-indigo-50 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-semibold text-indigo-800 mb-4">A. Calmar la Ansiedad y el Estrés Rápido</h3>
+                <p class="text-gray-700 mb-4">La exhalación más larga puede superar a la meditación de atención plena en la reducción de la ansiedad en solo cinco minutos.</p>
+
+                <!-- 1. Técnica 4-7-8 (La Respiración Relajante) - ELEMENTO INTERACTIVO 2: CONTADOR -->
+                <div class="bg-white p-6 rounded-xl border border-indigo-200 shadow-lg">
+                    <h4 class="text-xl font-bold text-indigo-600 mb-4">1. Técnica 4-7-8 (La Respiración Relajante)</h4>
+                    <p class="text-sm text-gray-500 mb-4">Ideal para reducir la ansiedad, manejar impulsos y ayudar a conciliar el sueño.</p>
+
+                    <div id="timer-display" class="text-center mb-6">
+                        <div id="phase-text" class="timer-phase text-xl font-bold p-3 rounded-t-lg bg-gray-100 text-gray-700">Listo para empezar</div>
+                        <div id="countdown" class="text-6xl font-extrabold text-indigo-600 py-4 bg-gray-50 rounded-b-lg shadow-inner">0</div>
+                    </div>
+
+                    <div class="flex justify-center space-x-4">
+                        <button id="start-btn" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-md hover:bg-indigo-700 transition duration-150">
+                            Iniciar Ciclo
+                        </button>
+                        <button id="reset-btn" class="px-6 py-3 bg-gray-200 text-gray-700 font-bold rounded-xl shadow-md hover:bg-gray-300 transition duration-150">
+                            Reiniciar
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-gray-500 mt-4 text-center">
+                        Consejo clave: Coloca la punta de la lengua en el paladar detrás de los dientes frontales superiores. Repite el ciclo hasta 4 veces.
+                    </p>
+                </div>
+
+                <!-- 2. Suspiro Cíclico / Exhalación Prolongada -->
+                <div class="mt-6 p-4 border-l-4 border-indigo-400 bg-indigo-100 rounded-lg">
+                    <h4 class="text-xl font-bold text-indigo-800 mb-2">2. Suspiro Cíclico / Exhalación Prolongada</h4>
+                    <p class="text-gray-700">
+                        <span class="font-bold">Instrucción:</span> Asegúrate de que tu exhalación sea significativamente más larga que tu inhalación (ejemplo: inhalar 2 segundos, exhalar 6-8 segundos).
+                        <br><span class="font-bold">Beneficio:</span> Conduce a las mayores mejoras en el estado de ánimo y reducción de la ansiedad.
+                    </p>
+                </div>
+            </div>
+
+            <!-- B. Objetivo: Lograr el Descanso y el Sueño Profundo -->
+            <div class="mb-8 p-6 bg-green-50 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-semibold text-green-800 mb-4">B. Lograr el Descanso y el Sueño Profundo</h3>
+
+                <!-- 3. Respiración Diafragmática (Abdominal o Profunda) -->
+                <div class="bg-white p-6 rounded-xl border border-green-200 shadow-lg mb-4">
+                    <h4 class="text-xl font-bold text-green-600 mb-2">3. Respiración Diafragmática</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><span class="font-bold">Paso 1: Posición.</span> Siéntate cómodamente o acuéstate boca arriba.</li>
+                        <li><span class="font-bold">Paso 2: Manos.</span> Coloca una mano sobre el pecho y la otra sobre el abdomen.</li>
+                        <li><span class="font-bold">Paso 3: Inhala.</span> Lentamente por la nariz, sintiendo cómo el abdomen se eleva (la mano en el pecho debe permanecer inmóvil).</li>
+                        <li><span class="font-bold">Paso 4: Exhala.</span> Lentamente por la boca (labios fruncidos), sintiendo cómo el abdomen se hunde.</li>
+                    </ul>
+                    <p class="mt-3 text-sm italic text-gray-500">Práctica: Repite durante 5-10 minutos, varias veces al día.</p>
+                </div>
+
+                <!-- 4. Bhramari Pranayama (Respiración del Abejorro) -->
+                <div class="bg-white p-6 rounded-xl border border-green-200 shadow-lg">
+                    <h4 class="text-xl font-bold text-green-600 mb-2">4. Bhramari Pranayama (Respiración del Abejorro)</h4>
+                    <p class="text-gray-700">
+                        <span class="font-bold">Instrucción:</span> Cierra los ojos y tápate los oídos con los dedos.<br>
+                        <span class="font-bold">Proceso:</span> Inhala profundamente y, al exhalar lentamente por la nariz con la boca cerrada, emite un zumbido suave que genera una vibración interna.<br>
+                        <span class="font-bold">Beneficio:</span> Calma el sistema nervioso, reduce el ruido mental y prepara el cuerpo para dormir.
+                    </p>
+                </div>
+            </div>
+
+            <!-- C. Objetivo: Enfoque, Concentración y Equilibrio -->
+            <div class="p-6 bg-yellow-50 rounded-2xl shadow-md">
+                <h3 class="text-2xl font-semibold text-yellow-800 mb-4">C. Enfoque, Concentración y Equilibrio</h3>
+
+                <!-- 5. Respiración de Caja (Box Breathing) -->
+                <div class="bg-white p-6 rounded-xl border border-yellow-200 shadow-lg mb-4">
+                    <h4 class="text-xl font-bold text-yellow-600 mb-2">5. Respiración de Caja (Box Breathing)</h4>
+                    <p class="text-gray-700 mb-3">Busca la concentración mental y la relajación. Todos los lados del "cuadrado" duran 4 segundos:</p>
+                    <div class="flex justify-around text-center font-bold">
+                        <div class="p-2 bg-yellow-100 rounded-lg">1. Inhala (4s)</div>
+                        <div class="p-2 bg-yellow-100 rounded-lg">2. Retén (4s)</div>
+                        <div class="p-2 bg-yellow-100 rounded-lg">3. Exhala (4s)</div>
+                        <div class="p-2 bg-yellow-100 rounded-lg">4. Retén Sin Aire (4s)</div>
+                    </div>
+                </div>
+
+                <!-- 6. Respiración Nasal Alternada (Nadi Shodhana) -->
+                <div class="bg-white p-6 rounded-xl border border-yellow-200 shadow-lg">
+                    <h4 class="text-xl font-bold text-yellow-600 mb-2">6. Respiración Nasal Alternada (Nadi Shodhana)</h4>
+                    <p class="text-gray-700">
+                        <span class="font-bold">Proceso:</span> Siéntate con la espalda recta.<br>
+                        1. Tapa la fosa nasal derecha (con el pulgar) e <span class="font-bold">inhala por la izquierda</span>.<br>
+                        2. Tapa la fosa nasal izquierda y <span class="font-bold">exhala por la derecha</span>.<br>
+                        3. <span class="font-bold">Inhala por la derecha</span>.<br>
+                        4. Tapa la derecha y <span class="font-bold">exhala por la izquierda</span>.<br>
+                        <span class="font-bold">Ciclo:</span> Repite esta rotación para fomentar el equilibrio interno.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: RESPIRACIÓN Y CONSCIENCIA PLENA (MINDFULNESS) -->
+        <section class="mb-12 p-8 bg-purple-50 rounded-2xl shadow-xl border-t-4 border-purple-600">
+            <h2 class="text-3xl font-bold text-purple-800 mb-4 text-center">Respiración y Consciencia Plena (Mindfulness)</h2>
+
+            <!-- Elemento Interactivo 3: El Ancla del Presente -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border border-purple-300">
+                <button id="anchor-btn" class="w-full text-left flex justify-between items-center text-xl font-semibold text-purple-700 hover:text-purple-900 transition duration-150">
+                    <span>❓ ¿Cómo vuelvo al presente cuando estoy abrumado?</span>
+                    <span id="anchor-arrow" class="transform transition-transform duration-300">▼</span>
+                </button>
+
+                <div id="anchor-answer" class="hidden mt-4 pt-4 border-t border-purple-200">
+                    <p class="text-gray-700">
+                        <span class="font-bold text-purple-700">Respuesta:</span> Dirige tu atención a tu respiración. La respiración es un ancla perfecta para conectar con el momento presente, porque <span class="italic">no podemos observar una respiración del pasado ni del futuro; la respiración siempre sucede Aquí y ahora.</span>
+                    </p>
+                    <p class="mt-4 font-semibold text-purple-800">Práctica de Mindfulness:</p>
+                    <ul class="list-disc list-inside text-gray-700 ml-4 space-y-1">
+                        <li><span class="font-semibold">Observa el flujo:</span> Siente la expansión de tu cuerpo al inhalar y cómo se hace más pequeñito al exhalar.</li>
+                        <li><span class="font-semibold">Ajusta el foco:</span> Dirige tu atención a las fosas nasales. Siente cómo el aire entra y sale.</li>
+                        <li><span class="font-semibold">Amabilidad sin Juicio:</span> Si tu mente divaga con pensamientos, con amabilidad y sin juicio, dirige tu atención de vuelta a la respiración.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: REQUISITOS Y RESULTADOS -->
+        <section class="p-8 bg-gray-100 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Requisitos y Resultados (Acceso Rápido)</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Configurando tu Espacio de Práctica -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3 flex items-center">
+                        🧘‍♀️ Configurando tu Espacio de Práctica
+                    </h3>
+                    <ul class="list-disc list-inside space-y-2 text-gray-600">
+                        <li><span class="font-bold">Postura:</span> Espalda recta, hombros relajados.</li>
+                        <li><span class="font-bold">Entorno:</span> Un lugar tranquilo y cómodo, sin distracciones.</li>
+                        <li><span class="font-bold">Relajación:</span> Relaja los músculos de la cara, el cuello y los hombros.</li>
+                    </ul>
+                </div>
+
+                <!-- Resultados y Constancia -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-3 flex items-center">
+                        ⏱ Resultados y Constancia
+                    </h3>
+                    <p class="text-gray-600 mb-3"><span class="font-bold">Frecuencia:</span> 5 a 10 minutos diarios son suficientes. La clave está en la constancia, no en la perfección.</p>
+                    <p class="font-bold text-gray-700">Beneficios:</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-600">
+                        <li>Mayor claridad mental.</li>
+                        <li>Mejor tolerancia al estrés.</li>
+                        <li>Sueño más profundo.</li>
+                        <li>Reducción del estrés y la ansiedad.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center text-xl font-bold text-indigo-600 mt-8 p-4 bg-indigo-100 rounded-xl">
+                ¡Empieza hoy mismo! La respiración consciente es la herramienta más directa, accesible y transformadora para autorregular el sistema nervioso.
+            </p>
+        </section>
+
+    </div>
+
+    <script>
+        // Lógica de Interacción JavaScript
+
+        // =======================================================
+        // ELEMENTO INTERACTIVO 1: El Freno Vagal (Nervio Vago)
+        // =======================================================
+        document.getElementById('vago-nerve-trigger').addEventListener('click', function() {
+            const infoPanel = document.getElementById('vago-info-panel');
+            infoPanel.classList.toggle('hidden');
+        });
+
+        // =======================================================
+        // ELEMENTO INTERACTIVO 2: Contador 4-7-8
+        // =======================================================
+        const startBtn = document.getElementById('start-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const phaseText = document.getElementById('phase-text');
+        const countdownDisplay = document.getElementById('countdown');
+        const phases = [
+            { text: "Inhala (Nariz)", duration: 4, color: "bg-indigo-600", text_color: "text-white" },
+            { text: "Retén (Aire)", duration: 7, color: "bg-sky-500", text_color: "text-white" },
+            { text: "Exhala (Boca, con ruido silbante)", duration: 8, color: "bg-green-600", text_color: "text-white" }
+        ];
+        let currentPhaseIndex = 0;
+        let timerId = null;
+        let isRunning = false;
+
+        // Inicializa el estado del contador
+        function resetTimer() {
+            if (timerId) {
+                clearTimeout(timerId);
+            }
+            isRunning = false;
+            currentPhaseIndex = 0;
+            phaseText.textContent = "Listo para empezar";
+            countdownDisplay.textContent = "0";
+            startBtn.textContent = "Iniciar Ciclo";
+            startBtn.disabled = false;
+            phaseText.className = 'timer-phase text-xl font-bold p-3 rounded-t-lg bg-gray-100 text-gray-700';
+            countdownDisplay.classList.remove('text-red-500', 'text-yellow-500', 'text-green-500');
+            countdownDisplay.classList.add('text-indigo-600');
+        }
+
+        function startPhase(index) {
+            if (index >= phases.length) {
+                phaseText.textContent = "¡Ciclo Completado! Presiona Iniciar para repetir.";
+                startBtn.textContent = "Repetir Ciclo";
+                isRunning = false;
+                currentPhaseIndex = 0;
+                return;
+            }
+
+            const phase = phases[index];
+            let timeLeft = phase.duration;
+
+            // Actualiza estilos de la fase
+            phaseText.textContent = phase.text + ` (${timeLeft}s)`;
+            phaseText.className = `timer-phase text-xl font-bold p-3 rounded-t-lg ${phase.color} ${phase.text_color}`;
+            countdownDisplay.textContent = timeLeft;
+            countdownDisplay.className = 'text-6xl font-extrabold py-4 bg-gray-50 rounded-b-lg shadow-inner ' + phase.text_color.replace('text-white', 'text-indigo-600'); // Mantiene el color del texto principal
+
+            // Función de cuenta regresiva
+            function countdown() {
+                if (timeLeft <= 0) {
+                    currentPhaseIndex++;
+                    startPhase(currentPhaseIndex);
+                    return;
+                }
+                
+                timeLeft--;
+                countdownDisplay.textContent = timeLeft;
+                timerId = setTimeout(countdown, 1000);
+            }
+
+            timerId = setTimeout(countdown, 1000); // Espera 1 segundo para el primer tick
+        }
+
+        startBtn.addEventListener('click', function() {
+            if (!isRunning) {
+                isRunning = true;
+                startBtn.textContent = "En Progreso...";
+                startPhase(currentPhaseIndex);
+            } else {
+                // Si el ciclo terminó y se presiona "Repetir Ciclo"
+                resetTimer();
+                startBtn.click(); // Vuelve a iniciar
+            }
+        });
+
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Inicialización al cargar la página
+        resetTimer();
+
+
+        // =======================================================
+        // ELEMENTO INTERACTIVO 3: El Ancla del Presente
+        // =======================================================
+        document.getElementById('anchor-btn').addEventListener('click', function() {
+            const answer = document.getElementById('anchor-answer');
+            const arrow = document.getElementById('anchor-arrow');
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                answer.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        });
+
+    </script>
+</body>
+</html>
